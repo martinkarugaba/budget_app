@@ -11,5 +11,9 @@
     <% if defined?(signup) && signup %>
       <%= f.submit "Next" %>
     <% end %>
+
+    <% if defined?(login) && login && f %>
+      <%= f.submit "Log in" %>
+    <% end %>
   </div>
 </div>
