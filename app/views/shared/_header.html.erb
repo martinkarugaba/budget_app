@@ -1,0 +1,19 @@
+<div class='flex bg-main border-white px-4 text-text-primary text-text-primary justify-between items-center w-full h-[70px]'>
+  <% if defined?(back) %>
+    <%= link_to 'javascript:history.back()', class: '' do %>
+      <i class="fas fa-arrow-left"></i>
+    <% end %>
+  <% end %>
+  
+  <h2 class='text-2xl font-medium uppercase'><%= heading %></h2>
+
+  <div class="actions font-medium">
+    <% if defined?(signup) && signup %>
+      <%= f.submit "Next" %>
+    <% end %>
+
+    <% if defined?(login) && login && f %>
+      <%= f.submit "Log in" %>
+    <% end %>
+  </div>
+</div>
