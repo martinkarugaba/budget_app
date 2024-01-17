@@ -1,17 +1,19 @@
-<div id="<%= dom_id group %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= group.name %>
-  </p>
+<div id="<%= dom_id group %>" class='border border-orange-500 w-full'>
+  <div class='flex justify-start items-center border w-auto gap-4 p-4'>
+    <p class="my-4 h-[100px] w-[100px] rounded border">
+      <%= image_tag(group.icon.variant(resize: "100x100", quality: 80), alt: "Group Icon") if group.icon.attached? %>
+    </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Icon:</strong>
-    <%= group.icon %>
-  </p>
+
+    <p class="my-4">
+      <%= group.name %>
+    </p>
+  </div>
 
   <% if action_name != "show" %>
-    <%= link_to "Show this group", group, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class='p-4 border'>
+    <%= link_to "Group details", group, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Edit this group", edit_group_path(group), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
+    </div>
   <% end %>
 </div>
