@@ -1,7 +1,10 @@
 <div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New group</h1>
+  <%= render partial: 'shared/header', locals: { heading: 'Create new group', back: true } %>
 
-  <%= render "form", group: @group %>
-
+  <div class='flex flex-col mb-8 justify-start items-center border-2 pt-8 px-8'>
+    <%= form_with(model: @group, local: true) do |form| %>
+      <%= render "form", form: form, group: @group %>
+    <% end %>
+  </div>
   <%= link_to "Back to groups", groups_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>
