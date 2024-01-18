@@ -25,7 +25,13 @@
 
   <div class="my-5">
     <%= form.label :category_ids, "Category" %> <br>
-    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    <div class="my-3">
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+        <div class="flex items-center">
+          <%= cb.label(class: "mr-2") { cb.check_box + " " + cb.text } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="inline">

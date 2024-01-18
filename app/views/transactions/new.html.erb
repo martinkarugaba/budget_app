@@ -1,8 +1,6 @@
-<div class="mx-auto md:w-2/3 w-full">
+<%= render partial: 'shared/header', locals: { heading: 'Create new transaction', back: true } %>
 
-  <%= render partial: 'shared/header', locals: { heading: 'Create new transaction', back: true } %>
-
-
+<div class="px-4 w-full">
   <%= render "form", transaction: @transaction %>
 
   <%= link_to "Transactions", transactions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
