@@ -1,4 +1,6 @@
-<div class="mx-auto md:w-2/3 w-full flex">
+<%= render partial: 'shared/header', locals: { heading: 'Edit Category', back: true } %>
+
+<div class="mx-auto md:w-2/3 border w-full flex">
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
@@ -10,6 +12,11 @@
     <div class="inline-block ml-2">
       <%= button_to "Delete", category_path(@category), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-red-500 font-medium" %>
     </div>
+
+    <% @category.financial_transactions.each do |transaction| %>
+      <%= render partial: 'transactions/transaction', locals: { transaction: transaction } %>
+    <% end %>
+
     <%= link_to "Back", categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
