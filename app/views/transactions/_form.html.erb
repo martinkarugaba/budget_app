@@ -1,20 +1,17 @@
-<%= form_with(model: entity, class: "contents") do |form| %>
-  <% if entity.errors.any? %>
+
+<%= form_with(model: transaction, class: "contents") do |form| %>
+
+  <% if transaction.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(entity.errors.count, "error") %> prohibited this entity from being saved:</h2>
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
 
       <ul>
-        <% entity.errors.each do |error| %>
+        <% transaction.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label :author_id %>
-    <%= form.text_field :author_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
 
   <div class="my-5">
     <%= form.label :name %>
@@ -24,6 +21,17 @@
   <div class="my-5">
     <%= form.label :amount %>
     <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :category_ids, "Category" %> <br>
+    <div class="my-3">
+      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+        <div class="flex items-center">
+          <%= cb.label(class: "mr-2") { cb.check_box + " " + cb.text } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="inline">
