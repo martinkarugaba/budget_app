@@ -1,0 +1,9 @@
+one:
+  author: one
+  name: MyString
+  amount: 9.99
+
+two:
+  author: two
+  name: MyString
+  amount: 9.99
