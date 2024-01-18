@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
 
-  root "home#index"
+  root "categories#index"
 
-  resources :entities
-  resources :groups
+  resources :categories
+  resources :transactions
+  
   resources :users
-
 end

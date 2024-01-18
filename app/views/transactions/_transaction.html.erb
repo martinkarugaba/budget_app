@@ -1,0 +1,21 @@
+<div id="<%= dom_id transaction %>">
+  <div class='flex justify-between items-center border-b'>
+    <p class="my-5">
+      <%= transaction.name %>
+    </p>
+
+    <p class="my-5">
+      <strong>$</strong><%= transaction.amount %>
+    </p>
+  </div>
+
+  <p class="my-5">
+    <%= transaction.created_at.strftime("%d %b %Y") %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Details", transaction, class: "rounded-lg py-2 px-4 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-2 ml-2 px-4 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
