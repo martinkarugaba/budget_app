@@ -4,4 +4,12 @@ class Transaction < ApplicationRecord
 
   validates :amount, presence: true
   validates :amount, numericality: { greater_than: 0 }
+
+  def self.total_amount
+    sum(:amount)
+  end
+
+  def self.recent
+    order(created_at: :desc)
+  end
 end
