@@ -67,5 +67,8 @@ RSpec.configure do |config|
 end
 
 Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, browser: :headless_firefox)
+  options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
 end
+
+Capybara.javascript_driver = :selenium
