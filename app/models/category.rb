@@ -10,6 +10,6 @@ class Category < ApplicationRecord
   validate :name_is_not_reserved
 
   def name_is_not_reserved
-    errors.add(:name, 'is reserved') if %w[admin user guest].include?(name.downcase)
+    errors.add(:name, 'is reserved') if name && %w[admin user guest].include?(name.downcase)
   end
 end
