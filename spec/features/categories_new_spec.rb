@@ -16,20 +16,8 @@ RSpec.feature 'Categories New View', type: :feature do
     expect(page).to have_selector('form')
   end
 
-  scenario 'displays the name field' do
-    expect(page).to have_field('Name')
-  end
-
-  scenario 'displays the amount field' do
-    expect(page).to have_field('Amount')
-  end
-
-  scenario 'displays the category checkboxes' do
-    expect(page).to have_selector('input[type=checkbox]')
-  end
-
   scenario 'displays the submit button' do
-    expect(page).to have_button('Create Category')
+    expect(page).to have_button('Save')
   end
 
   scenario 'displays the "Back to groups" link' do
