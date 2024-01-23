@@ -24,9 +24,9 @@
 
 # 📖 [budget_app] <a name="about-project"></a>
 
-> Describe your project in 1 or 2 sentences.
-
 **[budget_app]** is an app that helps you create transactions of different categories.
+
+[Link_to_video_description](https://www.loom.com/share/7dd6d32e1c2142ca884d8aa8b3a24372)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -116,9 +116,7 @@ To run tests, run the following command:
 
 ## 👥 Authors <a name="authors"></a>
 
-> Mention all of the collaborators of this project.
-
-👤 **Author1**
+👤 **Martin Karugaba**
 
 - GitHub: [@martinkarugaba](https://github.com/martinkarugaba)
 - Twitter: [@martin_karugaba](https://twitter.com/martin_karugaba)
@@ -127,8 +125,6 @@ To run tests, run the following command:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
-
-> Describe 1 - 3 features you will add to the project.
 
 - [ ] **[Add_more_styling]**
 
