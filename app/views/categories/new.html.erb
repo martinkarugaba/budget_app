@@ -1,12 +1,9 @@
-<%= render partial: 'shared/header', locals: { heading: 'Create new group', back: true } %>
+<%= render partial: 'shared/header', locals: { heading: 'Create category', back: true } %>
 
-<div class="px-4 w-full">
-  <div class='flex flex-col mb-8 justify-start items-center pt-8 px-8'>
-    <%= form_with(model: @category, local: true) do |form| %>
-      <%= render "form", form: form, category: @category %>
-    <% end %>
-  </div>
-  <div class='my-8'>
-    <%= link_to "Back to groups", categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
+<div class="px-4 border">
+  <%= form_with(model: @category, local: true) do |form| %>
+    <%= render "form", form: form, category: @category %>
+  <% end %>
+
+  <%= render partial: 'shared/button', locals: { button_text: 'Back to categories', button_path: categories_path } %>
 </div>

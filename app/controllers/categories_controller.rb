@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order(created_at: :desc)
   end
 
   def show; end
@@ -33,6 +33,8 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    params[:category].delete(:icon) if params[:category][:icon].blank?
+
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to categories_url, notice: 'Category was successfully updated.' }
@@ -48,7 +50,7 @@ class CategoriesController < ApplicationController
     @category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to categories_url, notice: 'Category deleted.' }
       format.json { head :no_content }
     end
   end
