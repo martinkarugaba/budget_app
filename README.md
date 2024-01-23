@@ -54,7 +54,12 @@
 ### Key Features <a name="key-features"></a>
 
 - **[Create_category]**
+- **[Delete_category]**
+- **[Edit_category]**
+
 - **[Create_transaction]**
+- **[Delete_transaction]**
+- **[Edit_transaction]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
