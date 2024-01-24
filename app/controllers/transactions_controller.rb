@@ -22,7 +22,9 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to transactions_url, notice: 'Entity was successfully created.' }
+        format.html do
+          redirect_to category_path(@transaction.categories.first), notice: 'Entity was successfully created.'
+        end
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +37,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html do
-          redirect_to transactions_path(@transaction.categories.first), notice: 'Entity was successfully updated.'
+          redirect_to category_path(@transaction.categories.first), notice: 'Entity was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -60,8 +62,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def transaction_params
-    params.require(:transaction).permit(:name, :amount, :author_id, category_ids: [])
+    params.require(:transaction).permit(:name, :amount, :image, :author_id, category_ids: [])
   end
 end

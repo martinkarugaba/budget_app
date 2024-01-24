@@ -19,7 +19,7 @@
 
   <div id="preview-container" class="hidden my-8">
     <div class='border-2 p-4 border-dashed h-[300px] w-full flex justify-center items-center'>
-      <img id="preview-image" src="#" alt="Image Preview" />
+      <img id="preview-image" class='h-full w-full object-contain' src="#" alt="Image Preview" />
     </div>
   </div>
 
@@ -45,7 +45,7 @@
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit "Save Transaction", class: "rounded py-3 px-5 bg-green-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
 

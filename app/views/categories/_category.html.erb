@@ -20,5 +20,7 @@
     <% end %>
   </div>
 
-  <%= render partial: 'shared/edit_and_delete_buttons', locals: { category: category } %>
+  <% if action_name != "show" %>
+    <%= render partial: 'shared/edit_and_delete_buttons', locals: { category: category } %>
+  <% end %>
 </section>

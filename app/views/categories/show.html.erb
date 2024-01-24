@@ -5,11 +5,11 @@
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
-    <div class='flex justify-between items-center border-2 py-8 px-4 bg-[#fafafa]'>
+    <div class='flex justify-between items-center py-8 px-4 bg-white'>
       <h1><%= @category.name %></h1>
       <p><strong>$</strong><%= @category.financial_transactions.sum(:amount) %></p>
     </div>
-    <div class='bg-text-primary p-4 px-4 flex flex-col justify-start items-center gap-4'>
+    <div class='bg-slate-100 p-4 px-4 flex flex-col justify-start items-center gap-4'>
       <% @category.financial_transactions.each do |transaction| %>
         <%= render partial: 'transactions/transaction', locals: { transaction: transaction } %>
       <% end %>
