@@ -1,17 +1,21 @@
-<div id="<%= dom_id transaction %>">
-  <div class='flex justify-between items-center border-b'>
-    <p class="my-5">
-      <%= transaction.name %>
-    </p>
+<div id="<%= dom_id transaction %>" class='w-full'>
+  <%= link_to transaction_path(transaction), class: "block" do %>
+    <div class='bg-white rounded p-3 border-orange-500'>
+      <div class='flex justify-between items-center border-b'>
+        <p class="my-4">
+          <%= transaction.name %>
+        </p>
 
-    <p class="my-5">
-      <strong>$</strong><%= transaction.amount %>
-    </p>
-  </div>
+        <p class="my-4">
+          <strong>$</strong><%= transaction.amount %>
+        </p>
+      </div>
 
-  <p class="my-5">
-    <%= transaction.created_at.strftime("%d %b %Y") %>
-  </p>
+      <p class="mt-2">
+        <%= transaction.created_at.strftime("%d %b %Y") %>
+      </p>
+    </div>
+  <% end %>
 
   <% if action_name != "show" %>
     <%= link_to "Details", transaction, class: "rounded-lg py-2 text-white px-4 bg-green-500 inline-block font-medium" %>
