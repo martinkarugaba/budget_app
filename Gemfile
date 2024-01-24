@@ -25,6 +25,9 @@ gem 'importmap-rails'
 
 gem 'font-awesome-rails'
 
+gem 'rails-controller-testing'
+
+
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
 

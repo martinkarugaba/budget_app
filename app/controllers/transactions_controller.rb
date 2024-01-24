@@ -23,7 +23,11 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
         format.html do
-          redirect_to category_path(@transaction.categories.first), notice: 'Entity was successfully created.'
+          if @transaction.categories.any?
+            redirect_to category_path(@transaction.categories.first), notice: 'Transaction created.'
+          else
+            redirect_to transactions_path, notice: 'Transaction created.'
+          end
         end
         format.json { render :show, status: :created, location: @transaction }
       else
@@ -37,12 +41,16 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html do
-          redirect_to category_path(@transaction.categories.first), notice: 'Entity was successfully updated.'
+          if @transaction.categories.any?
+            redirect_to category_path(@transaction.categories.first), notice: 'Transaction successfully updated.'
+          else
+            redirect_to transactions_path, notice: 'Transaction updated but no category was associated.'
+          end
         end
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_category }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,7 +59,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy!
 
     respond_to do |format|
-      format.html { redirect_to categories_path, notice: 'Entity was successfully destroyed.' }
+      format.html { redirect_to categories_path, notice: 'Transaction deleted.' }
       format.json { head :no_content }
     end
   end
