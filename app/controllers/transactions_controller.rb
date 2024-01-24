@@ -51,7 +51,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy!
 
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Entity was successfully destroyed.' }
+      format.html { redirect_to categories_path, notice: 'Entity was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -59,7 +59,11 @@ class TransactionsController < ApplicationController
   private
 
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.find_by(id: params[:id])
+
+    return if @transaction
+
+    redirect_to transactions_path, alert: 'Transaction not found.'
   end
 
   def transaction_params
