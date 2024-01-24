@@ -1,7 +1,7 @@
-<section class='border-2 rounded p-2'>  
+<section class='border-2 block w-full rounded p-2'>  
   <div class='border-amber-500'>
-    <%= link_to category, class: "block mb-2 cursor-pointer border-orange-500 w-[350px]" do %>
-      <div id="<%= dom_id category %>" class='flex justify-between items-center w-full'>
+    <%= link_to category, class: "block mb-2 cursor-pointer border-orange-500" do %>
+      <div id="<%= dom_id category %>" class='flex justify-between items-center'>
         <div class='flex justify-start items-center w-full gap-4'>
           <div class="h-[70px] w-[70px] border rounded flex justify-center items-center">
             <% if category.icon.attached? %>
@@ -20,7 +20,5 @@
     <% end %>
   </div>
 
-  <% if action_name != "show" %>
-    <%= render partial: 'shared/edit_and_delete_buttons', locals: { category: category } %>
-  <% end %>
+  <%= render partial: 'shared/edit_and_delete_buttons', locals: { category: category } %>
 </section>
