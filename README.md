@@ -151,7 +151,9 @@ Feel free to check the [issues page](../../issues/).
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank [Microverse](https://www.microverse.org/?grsf=martin-9isn0t) for guiding me through this project, giving code reviews and a community of fellow coders.
+- [ ] I would like to thank [Microverse](https://www.microverse.org/?grsf=martin-9isn0t) for guiding me through this project, giving code reviews and a community of fellow coders.
+
+- [ ] Many thanks to [Gregoire Vella on Behance](https://www.behance.net/gregoirevella) for providing the [design guidelines](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding?tracking_source=) for the app
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
