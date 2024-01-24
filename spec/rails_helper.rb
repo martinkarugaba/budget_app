@@ -66,9 +66,10 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
-Capybara.register_driver :selenium do |app|
-  options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: ['--headless', '--disable-gpu'])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = :headless_chrome
+
