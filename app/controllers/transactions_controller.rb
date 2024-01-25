@@ -22,7 +22,13 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to transactions_url, notice: 'Entity was successfully created.' }
+        format.html do
+          if @transaction.categories.any?
+            redirect_to category_path(@transaction.categories.first), notice: 'Transaction created.'
+          else
+            redirect_to transactions_path, notice: 'Transaction created.'
+          end
+        end
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,12 +41,16 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html do
-          redirect_to transactions_path(@transaction.categories.first), notice: 'Entity was successfully updated.'
+          if @transaction.categories.any?
+            redirect_to category_path(@transaction.categories.first), notice: 'Transaction successfully updated.'
+          else
+            redirect_to transactions_path, notice: 'Transaction updated but no category was associated.'
+          end
         end
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_category }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,7 +59,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy!
 
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Entity was successfully destroyed.' }
+      format.html { redirect_to categories_path, notice: 'Transaction deleted.' }
       format.json { head :no_content }
     end
   end
@@ -57,11 +67,14 @@ class TransactionsController < ApplicationController
   private
 
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.find_by(id: params[:id])
+
+    return if @transaction
+
+    redirect_to categories_path, alert: 'Transaction not found.'
   end
 
-  # Only allow a list of trusted parameters through.
   def transaction_params
-    params.require(:transaction).permit(:name, :amount, :author_id, category_ids: [])
+    params.require(:transaction).permit(:name, :amount, :image, :author_id, category_ids: [])
   end
 end

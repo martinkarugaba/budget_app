@@ -26,7 +26,7 @@
 
 **[budget_app]** is an app that helps you create transactions of different categories.
 
-[Link_to_video_description](https://www.loom.com/share/7dd6d32e1c2142ca884d8aa8b3a24372)
+[Link_to_video_description](https://www.loom.com/share/2caf14323b2b4d359b3c3c99a159a1c9?sid=d268d7d9-ca6d-4a80-9f8d-bfe2bf3d7a0c)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -54,7 +54,12 @@
 ### Key Features <a name="key-features"></a>
 
 - **[Create_category]**
+- **[Delete_category]**
+- **[Edit_category]**
+
 - **[Create_transaction]**
+- **[Delete_transaction]**
+- **[Edit_transaction]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,7 +98,7 @@ Install gems with:
 To run the project, execute the following command:
 
 ```sh
-  rails server
+  ./bin/dev
 ```
 
 ### Run tests
@@ -146,7 +151,9 @@ Feel free to check the [issues page](../../issues/).
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank [Microverse](https://www.microverse.org/?grsf=martin-9isn0t) for guiding me through this project, giving code reviews and a community of fellow coders.
+- [ ] I would like to thank [Microverse](https://www.microverse.org/?grsf=martin-9isn0t) for guiding me through this project, giving code reviews and a community of fellow coders.
+
+- [ ] Many thanks to [Gregoire Vella on Behance](https://www.behance.net/gregoirevella) for providing the [design guidelines](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding?tracking_source=) for the app
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

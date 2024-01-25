@@ -1,18 +1,45 @@
-  <%= render partial: 'shared/header', locals: { heading: 'Transaction Details', back: true } %>
+        <%= render partial: 'shared/header', locals: { heading: 'Details', back: true } %>
 
+        <div class="mx-auto md:w-2/3 w-full px-4">
+          <div class="mx-auto">
+          <% if notice.present? %>
+            <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+          <% end %>
+          </div>
+          <div class='w-full flex justify-start items-center gap-4 mt-4'>
+            <div class='border h-[70px] w-[70px] rounded border border-orange-500 flex justify-center items-center'>
+              <% if @transaction.image.attached? %>
+                <%= image_tag(@transaction.image, alt: @transaction.name) %>
+              <% else %>
+                <i class="fas fa-user fa-2x"></i>
+              <% end %>
+            </div>
+            <h1><%= @transaction.name %></h1>
+          </div>
 
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
+          <div class='text-secondary my-5'>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+          </div>
+          <hr>
+          <div class='my-5'>
+            <p class='font-bold text-xl text-secondary'>Transaction No: <%= @transaction.id %></p>
+            <p class="mt-4 text-sm font-light text-secondary">
+              <i class="far fa-calendar-alt ml-2"></i>
+              <%= @transaction.created_at.strftime("%d %b %Y") %> at <%= @transaction.created_at.strftime("%l:%M %P") %>
+            </p>
+          </div>
+          <hr>
 
-    <%= render @transaction %>
-
-    <%= link_to "Edit", edit_transaction_path(@transaction), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Delete", transaction_path(@transaction), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+          <div class='flex justify-between items-center py-4 text-secondary'>
+            <p class='font-semibold text-xl'>TOTAL PAYMENT</p>
+            <p>$<%= @transaction.amount%></p>
+          </div>
+        </div>
+      </div>
+          
+      <div class="inline-block ml-2 p-4 text-white flex justify-end items-center gap-4">
+        <%= link_to "Edit", edit_transaction_path(@transaction), class: "mt-2 rounded py-3 px-5 bg-amber-500 inline-block font-medium" %>
+        <%= button_to "Delete", transaction_path(@transaction), method: :delete, class: "mt-2 rounded py-3 px-5 bg-red-500 font-medium" %>
+      </div>
+      </div>
     </div>
-    <%= link_to "Back", transactions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
-</div>

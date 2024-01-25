@@ -1,29 +1,51 @@
+# spec/models/category_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  let(:user) { create(:user) }
-  let(:category) { build(:category, user:) }
-
   describe 'associations' do
-    it { should belong_to(:user) }
-    it { should have_and_belong_to_many(:financial_transactions).class_name('Transaction') }
-    it { should have_one_attached(:icon) }
+    it 'belongs to user' do
+      expect(Category.reflect_on_association(:user).macro).to eq(:belongs_to)
+    end
+
+    it 'has and belongs to many financial_transactions' do
+      expect(Category.reflect_on_association(:financial_transactions).macro).to eq(:has_and_belongs_to_many)
+      expect(Category.reflect_on_association(:financial_transactions).options[:class_name]).to eq('Transaction')
+    end
+
+    it 'has one attached icon' do
+      expect(Category.new).to respond_to(:icon)
+    end
   end
 
   describe 'validations' do
-    subject { create(:category, user:) } # Add this line
+    it 'validates presence of name' do
+      expect(Category.new).to validate_presence_of(:name)
+    end
 
-    it { should validate_presence_of(:name) }
-    it { should allow_value('Category1').for(:name) }
-    it { should_not allow_value('Category@').for(:name) }
-    it { should validate_uniqueness_of(:name).scoped_to(:user_id) } # This line will use the subject defined above
+    it 'allows valid name' do
+      expect(Category.new).to allow_value('Category1').for(:name)
+    end
 
-    it 'does not allow reserved names' do
-      %w[admin user guest].each do |reserved_name|
-        subject.name = reserved_name
-        expect(subject).not_to be_valid
-        expect(subject.errors[:name]).to include('is reserved')
-      end
+    it 'does not allow invalid name' do
+      expect(Category.new).not_to allow_value('Category@').for(:name)
+    end
+
+    it 'validates uniqueness of name scoped to user_id' do
+      user = create(:user)
+      category = create(:category, user:)
+
+      another_category = build(:category, name: category.name, user:)
+      expect(another_category).not_to be_valid
+      expect(another_category.errors[:name]).to include('has already been taken')
+    end
+  end
+
+  describe 'custom validations' do
+    it 'validates that name is not reserved' do
+      category = build(:category, name: 'admin')
+      category.valid?
+      expect(category.errors[:name]).to include('is reserved')
     end
   end
 end

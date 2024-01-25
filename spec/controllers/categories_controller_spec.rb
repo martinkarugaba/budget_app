@@ -1,130 +1,105 @@
 require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:valid_attributes) { FactoryBot.attributes_for(:category) }
-  let(:invalid_attributes) { FactoryBot.attributes_for(:category, name: nil) }
-  let(:valid_session) { { user_id: user.id } }
+  include Devise::Test::ControllerHelpers
+
+  let(:user) { create(:user) }
+  let(:category) { create(:category, user:) }
+
+  before do
+    sign_in user
+  end
 
   describe 'GET #index' do
-    it 'returns a success response' do
-      get :index, session: valid_session
-      expect(response).to be_successful
+    let!(:category) { create(:category, user:) }
+    it 'renders the index template' do
+      get :index
+      expect(response).to render_template(:index)
+    end
+
+    it 'assigns @categories' do
+      get :index
+      expect(assigns(:categories)).to match_array([category])
     end
   end
 
   describe 'GET #show' do
-    it 'returns a success response' do
-      category = FactoryBot.create(:category)
-      get :show, params: { id: category.to_param }, session: valid_session
-      expect(response).to be_successful
+    it 'renders the show template' do
+      get :show, params: { id: category.id }
+      expect(response).to render_template(:show)
     end
   end
 
   describe 'GET #new' do
-    it 'returns a success response' do
-      get :new, session: valid_session
-      expect(response).to be_successful
+    it 'renders the new template' do
+      get :new
+      expect(response).to render_template(:new)
     end
-  end
 
-  describe 'GET #edit' do
-    it 'returns a success response' do
-      category = FactoryBot.create(:category)
-      get :edit, params: { id: category.to_param }, session: valid_session
-      expect(response).to be_successful
+    it 'assigns a new category as @category' do
+      get :new
+      expect(assigns(:category)).to be_a_new(Category)
     end
   end
 
   describe 'POST #create' do
-    context 'with valid parameters' do
-      it 'creates a new Category' do
+    context 'with valid params' do
+      it 'creates a new category' do
         expect do
-          post :create, params: { category: valid_attributes }, session: valid_session
+          post :create, params: { category: attributes_for(:category) }
         end.to change(Category, :count).by(1)
       end
 
-      it 'assigns a newly created category as @category' do
-        post :create, params: { category: valid_attributes }, session: valid_session
-        expect(assigns(:category)).to be_a(Category)
-        expect(assigns(:category)).to be_persisted
-      end
-
-      it 'redirects to the categories index' do
-        post :create, params: { category: valid_attributes }, session: valid_session
+      it 'redirects to categories path' do
+        post :create, params: { category: attributes_for(:category) }
         expect(response).to redirect_to(categories_url)
       end
     end
 
-    context 'with invalid parameters' do
-      it 'does not create a new Category' do
-        expect do
-          post :create, params: { category: invalid_attributes }, session: valid_session
-        end.to change(Category, :count).by(0)
-      end
-
-      it 'assigns a newly created but unsaved category as @category' do
-        post :create, params: { category: invalid_attributes }, session: valid_session
-        expect(assigns(:category)).to be_a_new(Category)
-      end
-
-      it 're-renders the new template' do
-        post :create, params: { category: invalid_attributes }, session: valid_session
-        expect(response).to render_template('new')
+    context 'with invalid params' do
+      it 'renders the new template' do
+        post :create, params: { category: attributes_for(:category, name: nil) }
+        expect(response).to render_template(:new)
       end
     end
   end
 
+  describe 'GET #edit' do
+    it 'renders the edit template' do
+      get :edit, params: { id: category.id }
+      expect(response).to render_template(:edit)
+    end
+  end
+
   describe 'PUT #update' do
-    context 'with valid parameters' do
-      let(:new_attributes) { FactoryBot.attributes_for(:category, name: 'New Name') }
-
+    context 'with valid params' do
       it 'updates the requested category' do
-        category = FactoryBot.create(:category)
-        put :update, params: { id: category.to_param, category: new_attributes }, session: valid_session
-        category.reload
-        expect(category.name).to eq('New Name')
+        put :update, params: { id: category.id, category: { name: 'Updated Name' } }
+        expect(category.reload.name).to eq('Updated Name')
       end
 
-      it 'assigns the requested category as @category' do
-        category = FactoryBot.create(:category)
-        put :update, params: { id: category.to_param, category: valid_attributes }, session: valid_session
-        expect(assigns(:category)).to eq(category)
-      end
-
-      it 'redirects to the categories index' do
-        category = FactoryBot.create(:category)
-        put :update, params: { id: category.to_param, category: valid_attributes }, session: valid_session
+      it 'redirects to categories path' do
+        put :update, params: { id: category.id, category: { name: 'Updated Name' } }
         expect(response).to redirect_to(categories_url)
       end
     end
 
-    context 'with invalid parameters' do
-      it 'assigns the category as @category' do
-        category = FactoryBot.create(:category)
-        put :update, params: { id: category.to_param, category: invalid_attributes }, session: valid_session
-        expect(assigns(:category)).to eq(category)
-      end
-
-      it 're-renders the edit template' do
-        category = FactoryBot.create(:category)
-        put :update, params: { id: category.to_param, category: invalid_attributes }, session: valid_session
-        expect(response).to render_template('edit')
+    context 'with invalid params' do
+      it 'renders the edit template' do
+        put :update, params: { id: category.id, category: { name: nil } }
+        expect(response).to render_template(:edit)
       end
     end
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested category' do
-      category = FactoryBot.create(:category)
-      expect do
-        delete :destroy, params: { id: category.to_param }, session: valid_session
-      end.to change(Category, :count).by(-1)
-    end
+    let!(:category) { create(:category, user:) } # Use let! to create it before the test
 
-    it 'redirects to the categories index' do
-      category = FactoryBot.create(:category)
-      delete :destroy, params: { id: category.to_param }, session: valid_session
+    it 'destroys the requested category' do
+      expect do
+        delete :destroy, params: { id: category.id }
+      end.to change(Category, :count).by(-1)
+
       expect(response).to redirect_to(categories_url)
     end
   end

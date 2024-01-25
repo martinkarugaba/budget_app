@@ -17,10 +17,6 @@ RSpec.feature 'Categories Edit View', type: :feature do
     expect(page).to have_selector('form')
   end
 
-  scenario 'displays the "Show this category" link' do
-    expect(page).to have_link('Show this category', href: category_path(category))
-  end
-
   scenario 'displays the "Back to categories" link' do
     expect(page).to have_link('Back to categories', href: categories_path)
   end

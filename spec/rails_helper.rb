@@ -1,5 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'shoulda/matchers'
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -39,6 +41,9 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.infer_spec_type_from_file_location!
+  config.render_views
+
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
@@ -66,9 +71,16 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
-Capybara.register_driver :selenium do |app|
-  options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: ['--headless', '--disable-gpu'])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
 
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = :headless_chrome
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
