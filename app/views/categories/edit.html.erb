@@ -1,0 +1,7 @@
+<%= render partial: 'shared/header', locals: { heading: 'Edit Category', back: true } %>
+
+<div class="w-full px-4">
+  <%= render "form", category: @category %>
+</div>
+
+<%= render partial: 'shared/button', locals: { button_text: 'Back to categories', button_path: categories_path } %>

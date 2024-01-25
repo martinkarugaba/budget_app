@@ -1,0 +1,9 @@
+<%= render partial: 'shared/header', locals: { heading: 'Create category', back: true } %>
+
+<div class="px-4 border">
+  <%= form_with(model: @category, local: true) do |form| %>
+    <%= render "form", form: form, category: @category %>
+  <% end %>
+
+  <%= render partial: 'shared/button', locals: { button_text: 'Back to categories', button_path: categories_path } %>
+</div>

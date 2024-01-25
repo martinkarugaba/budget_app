@@ -1,0 +1,33 @@
+<div id="<%= dom_id transaction %>" class='w-full'>
+  <%= link_to transaction_path(transaction), class: "block" do %>
+    <div class='flex bg-white border-orange-500 w-full p-3 py-4 justify-start items-center gap-4'>
+      <div class="h-[70px] w-[70px] w-[20%] bg-slate-100 border-green-500 rounded flex justify-center items-center">
+        <% if transaction.image.attached? %>
+          <%= image_tag(url_for(transaction.image), alt: "Transaction Image", class: "fas fa-user fa-2x h-full w-full object-contain") %>
+        <% else %>
+          <i class="fas fa-user fa-2x"></i>
+        <% end %>
+      </div>
+      <div class='bg-white rounded w-[] w-full border-orange-500'>
+        <div class='flex justify-between items-center border-b'>
+          <p class="my-4">
+            <%= transaction.name %>
+          </p>
+          
+          <p class="my-4 font-semibold">
+            $<%= transaction.amount %>
+          </p>
+        </div>
+
+        <p class="mt-2 text-sm font-light">
+          <%= transaction.created_at.strftime("%d %b %Y") %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+
+  <% if action_name != "show" %>
+    <%= link_to "Details", transaction, class: "rounded-lg py-2 text-white px-4 bg-green-500 inline-block font-medium" %>
+    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-2 ml-2 px-4 bg-gray-100 inline-block font-medium" %>
+  <% end %>
+</div>

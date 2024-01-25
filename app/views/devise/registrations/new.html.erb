@@ -1,0 +1,60 @@
+
+<div class='flex flex-col w-full px-0 border-orange-400 justify-start bg-gray-50 items-center h-[100vh]'>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "flex flex-col bg-white justify-start items-center w-full gap-0" }) do |f| %>
+
+    <%= render 'shared/header', heading: 'Register', back: true, signup: true, f: f, submit: "Sign up" %>
+
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field flex justify-center w-full border-orange-300 mt-8 items-center px-[2rem]">
+      <%= f.file_field :picture, class: "hidden", id: "file-upload", accept: "image/*", onchange: "showPreview(this)" %>
+      <%= label_tag :picture, class: 'upload-icon flex justify-start items-center gap-4 w-full max-w-[310px]', for: 'file-upload' do %>
+        <div id="icon-container" class='flex justify-center items-center bg-gray-400 text-text-primary rounded-full h-[70px] w-[70px]'><i class="fas fa-user fa-2x"></i></div> <p>Upload Picture</p>
+      <% end %>
+    </div>
+
+    <div id="preview-container" class="hidden">
+      <img id="preview-image" src="#" alt="Preview" class="rounded-full h-[70px] w-[70px]">
+    </div>
+
+    <div class="field border-b">
+      <%= f.text_field :name, autofocus: true, placeholder: "Full name", class: "border-none py-4 bg-white" %>
+    </div>
+
+    <div class="field border-b">
+      <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "border-none py-4 bg-white" %>
+    </div>
+
+    <div class="field border-b">
+      <%= f.password_field :password, autocomplete: "new-password",placeholder: "Password(6 characters minimum)", class: "border-none py-4 bg-white" %>
+    </div>
+
+    <div class="field border-b">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" ,placeholder: "Confirm password",class: "border-none py-4 bg-white" %>
+    </div>
+  <% end %>
+
+  <div class='hidden'>
+  <%= render "devise/shared/links" %>
+  </div>
+</div>
+
+<script>
+  function showPreview(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+      // Hide the icon div
+      document.getElementById('icon-container').style.display = 'none';
+      
+      // Show the preview image
+      var previewContainer = document.getElementById('preview-container');
+      previewContainer.style.display = 'block';
+      previewContainer.getElementsByTagName('img')[0].src = e.target.result;
+    }
+    
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
