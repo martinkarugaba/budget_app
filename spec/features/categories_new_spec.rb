@@ -9,7 +9,7 @@ RSpec.feature 'Categories New View', type: :feature do
   end
 
   scenario 'displays the "Create new group" heading' do
-    expect(page).to have_content('Create new group')
+    expect(page).to have_content('Create category')
   end
 
   scenario 'displays the form' do
@@ -21,6 +21,6 @@ RSpec.feature 'Categories New View', type: :feature do
   end
 
   scenario 'displays the "Back to groups" link' do
-    expect(page).to have_link('Back to groups', href: categories_path)
+    expect(page).to have_link('Back to categories', href: categories_path)
   end
 end
