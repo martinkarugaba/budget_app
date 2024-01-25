@@ -26,7 +26,7 @@
 
 **[budget_app]** is an app that helps you create transactions of different categories.
 
-[Link_to_video_description](https://www.loom.com/share/7dd6d32e1c2142ca884d8aa8b3a24372)
+[Link_to_video_description](https://www.loom.com/share/2caf14323b2b4d359b3c3c99a159a1c9?sid=d268d7d9-ca6d-4a80-9f8d-bfe2bf3d7a0c)
 
 ## 🛠 Built With <a name="built-with"></a>
 
