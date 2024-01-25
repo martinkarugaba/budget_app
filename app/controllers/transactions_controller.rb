@@ -71,7 +71,7 @@ class TransactionsController < ApplicationController
 
     return if @transaction
 
-    redirect_to transactions_path, alert: 'Transaction not found.'
+    redirect_to categories_path, alert: 'Transaction not found.'
   end
 
   def transaction_params
